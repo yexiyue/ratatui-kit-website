@@ -28,17 +28,17 @@ export default function ThemeButton() {
   };
 
   return (
-    <label className="swap swap-rotate btn btn-circle btn-ghost btn-primary">
+    <label className="swap swap-rotate btn btn-circle btn-ghost btn-primary btn-sm">
       <input
         type="checkbox"
         checked={theme === "night"}
         onChange={toggleTheme}
       />
       <div className="swap-on">
-        <Sun size={20} />
+        <Sun size={18} />
       </div>
       <div className="swap-off">
-        <Moon size={20} />
+        <Moon size={18} />
       </div>
     </label>
   );

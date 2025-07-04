@@ -1,5 +1,5 @@
 ---
-import { Github } from "lucide-react";
+import { AlignJustify, Github } from "lucide-react";
 import Layout from "./Layout.astro";
 import SliderMenu from "@/components/SliderMenu.astro";
 import ThemeButton from "@/components/ThemeButton";
@@ -34,20 +34,9 @@ const { index = false } = Astro.props;
           <label
             for="docs-drawer"
             aria-label="open sidebar"
-            class="btn btn-square btn-ghost"
+            class="btn btn-square btn-ghost btn-sm btn-primary"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              class="inline-block h-6 w-6 stroke-current"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
+            <AlignJustify size={18} />
           </label>
         </div>
         <div
@@ -65,7 +54,7 @@ const { index = false } = Astro.props;
           <a
             href="https://github.com/yexiyue/ratatui-kit"
             target="_blank"
-            class="btn btn-circle btn-ghost btn-primary"
+            class="btn btn-circle btn-ghost btn-primary btn-sm"
           >
             <Github size={20} />
           </a>
