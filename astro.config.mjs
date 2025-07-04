@@ -13,4 +13,5 @@ export default defineConfig({
 
   integrations: [react()],
   site: "https://yexiyue.github.io/ratatui-kit-website",
+  base: "/ratatui-kit-website",
 });
