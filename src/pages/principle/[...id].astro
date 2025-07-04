@@ -1,0 +1,29 @@
+---
+import DocsLayout from "@/layouts/DocsLayout.astro";
+import type { GetStaticPaths } from "astro";
+import { render } from "astro:content";
+import { getCollection } from "astro:content";
+
+export const getStaticPaths = (async () => {
+  const principles = await getCollection("principle");
+  return principles.map((item) => {
+    return {
+      params: { id: item.id },
+      props: { principle: item },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const { principle } = Astro.props;
+
+const { Content } = await render(principle);
+---
+
+<DocsLayout>
+  <div class="p-4">
+    <h1 class="text-primary text-2xl text-center">
+      {principle.data.title}
+    </h1>
+    <Content />
+  </div>
+</DocsLayout>

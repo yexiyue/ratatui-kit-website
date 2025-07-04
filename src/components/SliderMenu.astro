@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+
+const principles = (await getCollection("principle")).sort((a, b) => {
+  return a.data.pubDate < b.data.pubDate ? -1 : 1;
+});
+
+const { id } = Astro.params;
+---
+
+<ul class="menu w-56">
+  <li>
+    <details open>
+      <summary>原理</summary>
+      <ul>
+        {
+          principles.map((item) => {
+            return (
+              <li>
+                <a
+                  href={`/principle/${item.id}`}
+                  class={item.id === id ? "menu-active" : ""}
+                >
+                  {item.data.title}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </details>
+  </li>
+</ul>
