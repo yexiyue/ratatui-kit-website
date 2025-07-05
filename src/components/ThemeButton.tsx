@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
 
 export default function ThemeButton() {
-  const [theme, setTheme] = useState("winter");
+  const [theme, setTheme] = useState("light");
 
   const init = () => {
     const stored = localStorage.getItem("theme");
     if (stored) {
       setTheme(stored);
-      document.documentElement.setAttribute("data-theme", stored || "winter");
+      document.documentElement.setAttribute("data-theme", stored || "light");
     }
   };
 
@@ -21,7 +21,7 @@ export default function ThemeButton() {
   }, []);
 
   const toggleTheme = () => {
-    const next = theme === "winter" ? "night" : "winter";
+    const next = theme === "light" ? "dark" : "light";
     setTheme(next);
     localStorage.setItem("theme", next);
     document.documentElement.setAttribute("data-theme", next);
@@ -31,7 +31,7 @@ export default function ThemeButton() {
     <label className="swap swap-rotate btn btn-circle btn-ghost btn-primary btn-sm">
       <input
         type="checkbox"
-        checked={theme === "night"}
+        checked={theme === "dark"}
         onChange={toggleTheme}
       />
       <div className="swap-on">

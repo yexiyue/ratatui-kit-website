@@ -20,9 +20,11 @@ const { index = false } = Astro.props;
     ]}
   >
     <input id="docs-drawer" type="checkbox" class="drawer-toggle" />
-    <div class="drawer-content h-screen flex flex-col overflow-auto">
+    <div
+      class="drawer-content h-screen flex flex-col overflow-auto"
+    >
       <!-- Navbar -->
-      <div class="navbar bg-base-100 w-full sticky top-0">
+      <div class="navbar w-full sticky top-0">
         <div
           class:list={[
             "flex-none",
@@ -68,11 +70,11 @@ const { index = false } = Astro.props;
     <div class="drawer-side z-40">
       <label for="docs-drawer" aria-label="close sidebar" class="drawer-overlay"
       ></label>
-      <div class="bg-base-100 h-full">
+      <div class="h-full">
         <div class="p-4 text-center cursor-pointer">
           <a href="/ratatui-kit-website">Ratatui Kit</a>
         </div>
-        <SliderMenu transition:persist />
+        <SliderMenu />
       </div>
     </div>
   </div>

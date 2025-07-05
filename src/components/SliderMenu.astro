@@ -1,33 +1,52 @@
 ---
 import { getCollection } from "astro:content";
+import { type MenuItem, Menu } from "./Menu";
 
 const principles = (await getCollection("principle")).sort((a, b) => {
   return a.data.pubDate < b.data.pubDate ? -1 : 1;
 });
 
-const { id } = Astro.params;
+const examples = (await getCollection("example")).sort((a, b) => {
+  return a.data.index < b.data.index ? -1 : 1;
+});
+
+const selectedKey = decodeURI(Astro.url.pathname);
+
+const menus: MenuItem[] = [
+  {
+    title: "文档",
+    url: "/ratatui-kit-website",
+    children: [
+      { title: "介绍", url: "/ratatui-kit-website/docs/intro" },
+      { title: "布局", url: "/ratatui-kit-website/docs/layout" },
+      { title: "组件", url: "/ratatui-kit-website/docs/component" },
+      { title: "Hooks", url: "/ratatui-kit-website/docs/hooks" },
+      { title: "路由", url: "/ratatui-kit-website/docs/router" },
+      { title: "全局状态", url: "/ratatui-kit-website/docs/global-state" },
+    ],
+  },
+  {
+    title: "示例",
+    url: "/ratatui-kit-website/example",
+    children: [
+      { title: "示例", url: "/ratatui-kit-website/example" },
+      ...examples.map((item) => ({
+        title: item.data.title,
+        url: `/ratatui-kit-website/example/${item.id}`,
+      })),
+    ],
+  },
+  {
+    title: "原理",
+    url: "/ratatui-kit-website/principle",
+    children: principles.map((item) => ({
+      title: item.data.title,
+      url: `/ratatui-kit-website/principle/${decodeURI(item.id)}`,
+    })),
+  },
+];
 ---
 
-<ul class="menu w-56">
-  <li>
-    <details open>
-      <summary>原理</summary>
-      <ul>
-        {
-          principles.map((item) => {
-            return (
-              <li>
-                <a
-                  href={`/ratatui-kit-website/principle/${item.id}`}
-                  class={item.id === id ? "menu-active" : ""}
-                >
-                  {item.data.title}
-                </a>
-              </li>
-            );
-          })
-        }
-      </ul>
-    </details>
-  </li>
-</ul>
+<div class="">
+  <Menu menu={menus} selectedKey={selectedKey} transition:persist client:load />
+</div>

@@ -12,4 +12,17 @@ const principle = defineCollection({
   }),
 });
 
-export const collections = { principle };
+const example = defineCollection({
+  loader: glob({
+    pattern: "**/*.md",
+    base: "./src/example",
+  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      index: z.number(),
+      image: image(),
+    }),
+});
+
+export const collections = { principle, example };
