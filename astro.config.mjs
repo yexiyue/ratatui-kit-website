@@ -25,11 +25,7 @@ export default defineConfig({
         rehypeMermaid,
         {
           // 可选配置项
-          strategy: "inline-svg", // 默认策略是 inline-svg，也可以选择 img-png, img-svg, pre-mermaid
-          mermaidConfig: {
-            theme: "default",
-            fontFamily: "arial,sans-serif",
-          },
+          strategy: "pre-mermaid", // 默认策略是 inline-svg，也可以选择 img-png, img-svg, pre-mermaid
         },
       ],
     ],

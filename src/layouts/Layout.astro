@@ -15,6 +15,12 @@ import { ClientRouter } from "astro:transitions";
     />
     <meta name="generator" content={Astro.generator} />
     <title>Ratatui Kit</title>
+    <!-- 支持mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
+    ></script>
+    <script is:inline>
+      mermaid.initialize({ startOnLoad: true });
+    </script>
     <ClientRouter />
   </head>
   <body class="overflow-hidden bg-base-200">

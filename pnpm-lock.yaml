@@ -26,9 +26,6 @@ importers:
       lucide-react:
         specifier: ^0.525.0
         version: 0.525.0(react@19.1.0)
-      playwright:
-        specifier: ^1.53.2
-        version: 1.53.2
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -4731,13 +4728,15 @@ snapshots:
       exsolve: 1.0.7
       pathe: 2.0.3
 
-  playwright-core@1.53.2: {}
+  playwright-core@1.53.2:
+    optional: true
 
   playwright@1.53.2:
     dependencies:
       playwright-core: 1.53.2
     optionalDependencies:
       fsevents: 2.3.2
+    optional: true
 
   points-on-curve@0.2.0: {}
 

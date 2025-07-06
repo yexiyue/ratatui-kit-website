@@ -51,3 +51,7 @@ svg[id^="mermaid"] {
   margin: 0 auto;
   @apply w-full bg-base-100 border border-base-300 rounded-lg;
 }
+
+.mermaid {
+  @apply bg-base-200;
+}
