@@ -8,6 +8,7 @@
   @media (min-width: 64rem) {
     padding-inline-start: 2rem;
   }
+
   :where(blockquote p:first-of-type):not(
       :where([class~="not-prose"], [class~="not-prose"] *)
     ) {
@@ -16,18 +17,17 @@
       content: none;
     }
   }
-  blockquote {
-    @apply alert alert-info not-italic items-start leading-loose *:m-0!;
+
+  p > code {
+    @apply badge badge-outline badge-secondary badge-xs md:badge-sm;
   }
 
-  :where(code):not(pre > code) {
-    margin-inline: 0.25em;
+  a > code {
+    @apply badge badge-outline badge-info badge-xs md:badge-sm;
   }
-  :where(kbd):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-    margin-inline: 0.25em;
-  }
-  :where(p a, li a) {
-    margin-inline: 0.25em;
+
+  blockquote {
+    @apply alert alert-info not-italic items-start leading-loose *:m-0!;
   }
 }
 
@@ -41,4 +41,13 @@
     font-weight: var(--shiki-dark-font-weight) !important;
     text-decoration: var(--shiki-dark-text-decoration) !important;
   }
+}
+
+.astro-code {
+  @apply border border-base-300 bg-base-100!;
+}
+
+svg[id^="mermaid"] {
+  margin: 0 auto;
+  @apply w-full bg-base-100 border border-base-300 rounded-lg;
 }
