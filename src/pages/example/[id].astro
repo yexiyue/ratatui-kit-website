@@ -21,11 +21,8 @@ const { Content } = await render(example);
 ---
 
 <DocsLayout>
-  <div class="p-4 flex flex-col gap-4">
-    <h1 class="text-primary text-2xl text-center">
-      {example.data.title}
-    </h1>
-    <Content />
+  <div class="p-4 prose prose-sm md:prose-base w-full max-w-4xl grow pt-10">
+    <Content class="w-full" />
     <img src={example.data.image.src} alt={example.data.title} />
   </div>
 </DocsLayout>

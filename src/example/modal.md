@@ -4,6 +4,8 @@ index: 4
 image: ../assets/example/modal.gif
 ---
 
+## JSON 编辑器
+
 本案例演示了如何在 Rust 终端应用中，利用 ratatui-kit 实现一个带 Modal 弹窗的 JSON 编辑与校验工具。用户可以在文本框中输入或粘贴 JSON 内容，程序会实时校验并格式化输入。按下 Tab 键可弹出 Modal，查看格式化结果或错误提示。通过本示例，你可以学习到 Modal 组件的用法、事件处理、状态管理以及如何实现终端下的交互式校验体验。
 
 ```rust

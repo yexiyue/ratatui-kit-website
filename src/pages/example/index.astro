@@ -1,6 +1,5 @@
 ---
 import DocsLayout from "@/layouts/DocsLayout.astro";
-import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
 const examples = (await getCollection("example")).sort((a, b) => {
@@ -10,19 +9,19 @@ const examples = (await getCollection("example")).sort((a, b) => {
 
 <DocsLayout>
   <div
-    class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6"
+    class="p-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6"
   >
     {
       examples.map((example) => (
         <a
           href={`/ratatui-kit-website/example/${example.id}`}
-          class="card bg-base-100 card-border border-base-300 card-sm aspect-video shadow-sm cursor-pointer hover:shadow-lg transition-shadow"
+          class="card bg-base-100 card-border border-base-300 card-xs md:card-sm shadow-sm cursor-pointer hover:shadow-lg transition-shadow"
         >
-          <figure class="px-10 pt-10">
+          <figure class="p-4">
             <img
               src={example.data.image.src}
               alt={example.data.title}
-              class="w-full h-48 object-fill"
+              class={`w-full aspect-[2.5] object-fill rounded-sm`}
             />
           </figure>
           <div class="card-body items-center text-center">

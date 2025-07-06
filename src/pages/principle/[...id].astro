@@ -20,10 +20,7 @@ const { Content } = await render(principle);
 ---
 
 <DocsLayout>
-  <div class="p-4 flex flex-col gap-4">
-    <h1 class="text-primary text-2xl text-center">
-      {principle.data.title}
-    </h1>
+  <div class="p-4 prose prose-sm md:prose-base w-full max-w-4xl grow pt-10">
     <Content />
   </div>
 </DocsLayout>

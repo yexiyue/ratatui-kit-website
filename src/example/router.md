@@ -4,6 +4,8 @@ index: 5
 image: ../assets/example/router.gif
 ---
 
+## 路由
+
 本案例演示了如何在 Rust 终端应用中，利用 ratatui-kit 实现多页面路由功能。用户可以在不同页面间自由切换，如首页、计数器、Markdown 阅读器和文本输入页面，每个页面都具备独立的交互体验。通过本示例，你可以学习到 RouterProvider 路由组件的用法、页面跳转、事件处理以及如何构建结构化的终端多页面应用。
 
 ```rust

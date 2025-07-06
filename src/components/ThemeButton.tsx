@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
+import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
 
 export default function ThemeButton() {
   const [theme, setTheme] = useState("light");
 
-  const init = () => {
+  const init = (e?: TransitionBeforeSwapEvent) => {
+    const newDocument = e?.newDocument || document;
     const stored = localStorage.getItem("theme");
     if (stored) {
       setTheme(stored);
-      document.documentElement.setAttribute("data-theme", stored || "light");
+      newDocument.documentElement.setAttribute("data-theme", stored || "light");
     }
   };
 
   useEffect(() => {
     init();
-    console.log("theme", theme);
-    document.addEventListener("astro:after-swap", init);
+    document.addEventListener("astro:before-swap", init);
 
-    return () => document.removeEventListener("astro:after-swap", init);
+    return () => document.removeEventListener("astro:before-swap", init);
   }, []);
 
   const toggleTheme = () => {

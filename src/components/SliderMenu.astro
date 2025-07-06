@@ -24,8 +24,9 @@ const menus: MenuItem[] = [
     url: "/ratatui-kit-website",
     children: [
       { title: "介绍", url: "/ratatui-kit-website/docs/intro" },
-      { title: "布局", url: "/ratatui-kit-website/docs/layout" },
+      { title: "快速入门", url: "/ratatui-kit-website/docs/quick-start" },
       { title: "组件", url: "/ratatui-kit-website/docs/component" },
+      { title: "布局", url: "/ratatui-kit-website/docs/layout" },
       { title: "Hooks", url: "/ratatui-kit-website/docs/hooks" },
       { title: "路由", url: "/ratatui-kit-website/docs/router" },
       { title: "全局状态", url: "/ratatui-kit-website/docs/global-state" },
@@ -53,6 +54,6 @@ const menus: MenuItem[] = [
 ];
 ---
 
-<div class="bg-base-200">
+<div class="bg-base-200 pb-8">
   <Menu menu={menus} selectedKey={selectedKey} transition:persist client:load />
 </div>

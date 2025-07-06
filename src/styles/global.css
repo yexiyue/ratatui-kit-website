@@ -1,2 +1,44 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @plugin "daisyui";
+
+/* prose */
+
+.prose {
+  @media (min-width: 64rem) {
+    padding-inline-start: 2rem;
+  }
+  :where(blockquote p:first-of-type):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    ) {
+    &:before,
+    &:after {
+      content: none;
+    }
+  }
+  blockquote {
+    @apply alert alert-info not-italic items-start leading-loose *:m-0!;
+  }
+
+  :where(code):not(pre > code) {
+    margin-inline: 0.25em;
+  }
+  :where(kbd):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    margin-inline: 0.25em;
+  }
+  :where(p a, li a) {
+    margin-inline: 0.25em;
+  }
+}
+
+:root[data-theme="dark"] {
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}

@@ -4,6 +4,8 @@ index: 1
 image: ../assets/example/counter.gif
 ---
 
+## 计数器
+
 本案例演示了如何使用 ratatui-kit 在 Rust 终端应用中实现一个简单的计数器。计数器会每秒自动加一，并实时在终端界面中展示当前数值。通过本示例，你可以学习到 ratatui-kit 的组件化写法、状态管理（use_state）、异步任务（use_future）以及如何在终端 UI 中进行动态内容渲染。
 
 ```rust

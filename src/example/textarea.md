@@ -3,6 +3,7 @@ title: "文本输入框"
 index: 2
 image: ../assets/example/textarea.gif
 ---
+## 文本输入框
 
 本案例展示了如何在 Rust 终端应用中，利用 ratatui-kit 实现一个支持提交与退出的单行文本输入框。用户可以在输入框中输入内容，按 Enter 键将输入作为消息插入到界面上方，按 Esc 键则可直接退出程序。通过本示例，你将学会 ratatui-kit 输入组件的基本用法、事件响应、状态管理，以及如何动态插入一行内容。
 

@@ -4,6 +4,8 @@ index: 3
 image: ../assets/example/scrollview.gif
 ---
 
+## ScrollView
+
 本案例演示了如何在 Rust 终端应用中，利用 ratatui-kit 实现带滚动功能的内容展示。通过本示例，你可以学习到如何使用 ScrollView 组件实现内容的滚动浏览，以及如何结合事件处理和状态管理，构建交互式终端界面。
 
 ```rust

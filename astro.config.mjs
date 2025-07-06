@@ -14,4 +14,12 @@ export default defineConfig({
   integrations: [react()],
   site: "https://yexiyue.github.io/ratatui-kit-website",
   base: "/ratatui-kit-website",
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: "github-light",
+        dark: "github-dark",
+      },
+    },
+  },
 });
