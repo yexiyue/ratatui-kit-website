@@ -3,6 +3,15 @@ import { AlignJustify, Github } from "lucide-react";
 import Layout from "./Layout.astro";
 import SliderMenu from "@/components/SliderMenu.astro";
 import ThemeButton from "@/components/ThemeButton";
+import mermaid from "mermaid";
+
+mermaid.initialize({
+  startOnLoad: true,
+  theme: "dark",
+  flowchart: {
+    useMaxWidth: false,
+  },
+});
 
 interface Props {
   index?: boolean;
