@@ -25,4 +25,15 @@ const example = defineCollection({
     }),
 });
 
-export const collections = { principle, example };
+const docs = defineCollection({
+  loader: glob({
+    pattern: "**/*.md",
+    base: "./src/docs",
+  }),
+  schema: z.object({
+    title: z.string(),
+    index: z.number(),
+  }),
+});
+
+export const collections = { principle, example, docs };

@@ -55,3 +55,47 @@ svg[id^="mermaid"] {
 .mermaid {
   @apply bg-base-200;
 }
+
+.anchor {
+  position: relative;
+}
+
+.link-anchor {
+  position: absolute;
+  top: 50%;
+  left: -28px;
+  display: flex;
+  width: 28px;
+  height: 28px;
+  margin: auto;
+  opacity: 0;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-50%);
+  border: none;
+  @apply fill-base-content;
+}
+
+.anchor:hover .link-anchor {
+  opacity: 1;
+}
+
+.flowchart {
+  .nodeLabel,
+  .edgeLabel {
+    @apply text-base-content!;
+  }
+
+  .label-container {
+    @apply fill-base-200! stroke-primary-content!;
+  }
+
+  .flowchart-link {
+    @apply stroke-base-content!;
+  }
+
+  .label-container,
+  .labelBkg {
+    @apply bg-base-100!;
+  }
+}
