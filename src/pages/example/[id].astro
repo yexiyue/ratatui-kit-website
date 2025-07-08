@@ -1,4 +1,5 @@
 ---
+import { HeadingMenu } from "@/components/HeadingMenu";
 import DocsLayout from "@/layouts/DocsLayout.astro";
 import type { GetStaticPaths } from "astro";
 import { Image } from "astro:assets";
@@ -17,14 +18,22 @@ export const getStaticPaths = (async () => {
 
 const { example } = Astro.props;
 
-const { Content } = await render(example);
+const { Content, headings, remarkPluginFrontmatter } = await render(example);
 ---
 
 <DocsLayout>
-  <div
-    class="p-4 prose prose-sm md:prose-base w-full max-w-4xl grow pt-10 pb-10"
-  >
-    <Content class="w-full" />
-    <img src={example.data.image.src} alt={example.data.title} />
+  <div class="flex items-start">
+    <div
+      class="pl-6 prose prose-sm md:prose-base max-w-none flex-1 pt-10 pb-10 overflow-hidden"
+    >
+      <Content />
+      <p>运行结果如下：</p>
+      <img src={example.data.image.src} alt={example.data.title} />
+    </div>
+    <HeadingMenu
+      readingTime={remarkPluginFrontmatter.readingTime}
+      headingData={headings}
+      client:load
+    />
   </div>
 </DocsLayout>

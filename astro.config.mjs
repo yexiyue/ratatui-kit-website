@@ -6,6 +6,7 @@ import rehypeMermaid from "rehype-mermaid";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import { fromHtmlIsomorphic } from "hast-util-from-html-isomorphic";
+import { remarkReadingTime } from "./src/plugins/remark-reading-time";
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,6 +18,7 @@ export default defineConfig({
   site: "https://yexiyue.github.io/ratatui-kit-website",
   base: "/ratatui-kit-website",
   markdown: {
+    remarkPlugins: [remarkReadingTime],
     shikiConfig: {
       themes: {
         light: "github-light",
