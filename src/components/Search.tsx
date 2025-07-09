@@ -100,7 +100,7 @@ export const DocsSearch = () => {
           <input
             type="search"
             className="grow"
-            placeholder="Search"
+            placeholder="搜索文档"
             value={value}
             onChange={handleChange}
           />
