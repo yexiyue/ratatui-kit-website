@@ -3,16 +3,7 @@ import { AlignJustify, Github } from "lucide-react";
 import Layout from "./Layout.astro";
 import SliderMenu from "@/components/SliderMenu.astro";
 import ThemeButton from "@/components/ThemeButton";
-import mermaid from "mermaid";
 import { DocsSearch } from "@/components/Search";
-
-mermaid.initialize({
-  startOnLoad: true,
-  theme: "dark",
-  flowchart: {
-    useMaxWidth: false,
-  },
-});
 
 interface Props {
   index?: boolean;
@@ -99,3 +90,17 @@ const { index = false } = Astro.props;
     </div>
   </div>
 </Layout>
+
+<script is:inline data-astro-rerun type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.8.1/+esm";
+
+  const theme = localStorage.getItem("theme") || "dark";
+
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: theme,
+    flowchart: {
+      useMaxWidth: false,
+    },
+  });
+</script>
