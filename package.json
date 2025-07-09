@@ -16,7 +16,10 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "astro": "^5.10.0",
+    "flexsearch": "^0.8.205",
+    "fuse.js": "^7.1.0",
     "hast-util-from-html-isomorphic": "^2.0.0",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.525.0",
     "mdast-util-to-string": "^4.0.0",
     "mermaid": "^11.8.0",
@@ -33,6 +36,10 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
-    "daisyui": "^5.0.43"
+    "@types/lodash": "^4.17.20",
+    "@types/lunr": "^2.3.7",
+    "@types/markdown-it": "^14.1.2",
+    "daisyui": "^5.0.43",
+    "markdown-it": "^14.1.0"
   }
 }

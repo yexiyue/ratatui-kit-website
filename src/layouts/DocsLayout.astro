@@ -4,6 +4,7 @@ import Layout from "./Layout.astro";
 import SliderMenu from "@/components/SliderMenu.astro";
 import ThemeButton from "@/components/ThemeButton";
 import mermaid from "mermaid";
+import { DocsSearch } from "@/components/Search";
 
 mermaid.initialize({
   startOnLoad: true,
@@ -58,6 +59,9 @@ const { index = false } = Astro.props;
         >
           <a href="/ratatui-kit-website" class="text-nowrap">Ratatui Kit</a>
         </div>
+        <div class="hidden md:flex w-xs">
+          <DocsSearch client:load transition:persist />
+        </div>
         <div class="flex-1"></div>
         <div class="navbar-end flex gap-2">
           <a
@@ -83,9 +87,12 @@ const { index = false } = Astro.props;
       ></label>
       <div class="h-full bg-base-200">
         <div
-          class="p-4 text-center h-16 cursor-pointer sticky top-0 bg-base-200 z-10"
+          class="p-4 text-center h-16 cursor-pointer sticky top-0 bg-base-200 z-10 hidden lg:block"
         >
           <a href="/ratatui-kit-website">Ratatui Kit</a>
+        </div>
+        <div class="md:hidden w-[200px] m-auto mt-4">
+          <DocsSearch client:load transition:persist />
         </div>
         <SliderMenu />
       </div>

@@ -41,7 +41,7 @@ export const HeadingMenu = (props: {
   };
 
   return (
-    <div className="w-68 shrink-0 sticky top-0 p-4 hidden md:flex">
+    <div className="w-68 shrink-0 sticky top-0 p-4 pl-0 hidden md:flex">
       <div className="divider divider-horizontal divider-nature ml-0"></div>
       <div>
         <h2>目录</h2>
