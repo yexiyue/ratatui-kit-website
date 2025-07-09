@@ -3,7 +3,7 @@ title: "介绍"
 index: 1
 ---
 
-# Ratatui Kit 介绍
+## Ratatui Kit 介绍
 
 ## 什么是 Ratatui Kit？
 

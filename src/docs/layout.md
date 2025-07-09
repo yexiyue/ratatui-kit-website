@@ -1,9 +1,9 @@
 ---
 title: "布局"
-index: 2
+index: 3
 ---
 
-# 布局使用指南
+## 布局使用指南
 
 Ratatui Kit 提供了统一且灵活的终端 UI 布局能力，其核心在于 `LayoutStyle`。通过合理配置 `LayoutStyle`，可以高效描述和控制组件的排列方式、对齐、间距等常见布局需求。
 

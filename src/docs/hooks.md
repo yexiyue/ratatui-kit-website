@@ -1,9 +1,9 @@
 ---
 title: "Hooks"
-index: 4
+index: 5
 ---
 
-# Hooks 使用指南
+## Hooks 使用指南
 
 Ratatui Kit 内置了丰富的 Hooks 机制，帮助你在终端 UI 组件中高效管理状态、副作用和生命周期。Hooks 让组件逻辑更简洁、可复用，是响应式开发的核心能力。
 

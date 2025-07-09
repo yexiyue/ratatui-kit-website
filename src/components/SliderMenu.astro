@@ -10,6 +10,10 @@ const examples = (await getCollection("example")).sort((a, b) => {
   return a.data.index < b.data.index ? -1 : 1;
 });
 
+const docs = (await getCollection("docs")).sort((a, b) => {
+  return a.data.index < b.data.index ? -1 : 1;
+});
+
 const pathname = decodeURI(Astro.url.pathname);
 
 let selectedKey = pathname;
@@ -22,15 +26,10 @@ const menus: MenuItem[] = [
   {
     title: "文档",
     url: "/ratatui-kit-website",
-    children: [
-      { title: "介绍", url: "/ratatui-kit-website/docs/intro" },
-      { title: "快速入门", url: "/ratatui-kit-website/docs/quick-start" },
-      { title: "布局", url: "/ratatui-kit-website/docs/layout" },
-      { title: "组件", url: "/ratatui-kit-website/docs/component" },
-      { title: "Hooks", url: "/ratatui-kit-website/docs/hooks" },
-      { title: "路由", url: "/ratatui-kit-website/docs/router" },
-      { title: "全局状态", url: "/ratatui-kit-website/docs/global-state" },
-    ],
+    children: docs.map((item) => ({
+      title: item.data.title,
+      url: `/ratatui-kit-website/docs/${item.id}`,
+    })),
   },
   {
     title: "示例",
