@@ -21,7 +21,15 @@ export const DocsSearch = () => {
     example: [],
     principle: [],
   });
-
+  const containsSearchTerm = (text: string, searchValue: string): boolean => {
+    if (!searchValue) return false;
+    try {
+      const regex = new RegExp(searchValue, "i");
+      return regex.test(text);
+    } catch {
+      return text.toLowerCase().includes(searchValue.toLowerCase());
+    }
+  };
   useEffect(() => {
     fetch("/ratatui-kit-website/search-index.json")
       .then((response) => response.json())
@@ -45,6 +53,7 @@ export const DocsSearch = () => {
         data.forEach((doc: Article) => {
           flexSearch.add(doc);
         });
+
         fuse.current = flexSearch;
       });
   }, []);
@@ -115,49 +124,68 @@ export const DocsSearch = () => {
           {results.docs?.length > 0 && (
             <>
               <li className="menu-title text-info">文档</li>
-              {results.docs.map((doc) => (
-                <li key={doc.id}>
-                  <a
-                    href={doc.id as string}
-                    className="hover:bg-neutral hover:text-neutral-content"
-                    onClick={onClick}
-                  >
-                    <p className="truncate">{doc.doc?.title}</p>
-                  </a>
-                </li>
-              ))}
+              {results.docs.map((doc) => {
+                const title = doc.doc?.title || "";
+                const isMatch = containsSearchTerm(title, value);
+                return (
+                  <li key={doc.id}>
+                    <a
+                      href={doc.id as string}
+                      className={`hover:bg-neutral hover:text-neutral-content ${
+                        isMatch ? "bg-red-600 text-white" : ""
+                      }`}
+                      onClick={onClick}
+                    >
+                      {title}
+                    </a>
+                  </li>
+                );
+              })}
             </>
           )}
           {results.example?.length > 0 && (
             <>
               <li className="menu-title text-info">示例</li>
-              {results.example.map((doc) => (
-                <li key={doc.id}>
-                  <a
-                    href={doc.id as string}
-                    className="hover:bg-neutral hover:text-neutral-content"
-                    onClick={onClick}
-                  >
-                    <p className="truncate">{doc.doc?.title}</p>
-                  </a>
-                </li>
-              ))}
+
+              {results.example.map((doc) => {
+                const title = doc.doc?.title || "";
+                const isMatch = containsSearchTerm(title, value);
+                return (
+                  <li key={doc.id}>
+                    <a
+                      href={doc.id as string}
+                      className={`hover:bg-neutral hover:text-neutral-content ${
+                        isMatch ? "bg-red-600 text-white" : ""
+                      }`}
+                      onClick={onClick}
+                    >
+                      {title}
+                    </a>
+                  </li>
+                );
+              })}
             </>
           )}
           {results.principle?.length > 0 && (
             <>
               <li className="menu-title text-info">原理</li>
-              {results.principle.map((doc) => (
-                <li key={doc.id}>
-                  <a
-                    href={doc.id as string}
-                    className="hover:bg-neutral hover:text-neutral-content"
-                    onClick={onClick}
-                  >
-                    <p className="truncate">{doc.doc?.title}</p>
-                  </a>
-                </li>
-              ))}
+              {results.principle.map((doc) => {
+                const title = doc.doc?.title || "";
+                const isMatch = containsSearchTerm(title, value);
+                return (
+                  <li key={doc.id}>
+                    <a
+                      href={doc.id as string}
+                      className={`hover:bg-neutral hover:text-neutral-content ${
+                        isMatch ? "bg-red-600 text-white" : ""
+                      }`}
+                      onClick={onClick}
+                    >
+                      {title}
+                    </a>
+                  </li>
+                );
+              })}
             </>
           )}
         </ul>
