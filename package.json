@@ -11,18 +11,22 @@
   "dependencies": {
     "@astrojs/markdown-remark": "^6.3.2",
     "@astrojs/react": "^4.3.0",
+    "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.11",
+    "@types/lodash": "^4.17.20",
+    "@types/lunr": "^2.3.7",
+    "@types/markdown-it": "^14.1.2",
     "@types/mdast": "^4.0.4",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "astro": "^5.10.0",
+    "astro": "^5.11.0",
+    "daisyui": "^5.0.43",
     "flexsearch": "^0.8.205",
     "fuse.js": "^7.1.0",
     "hast-util-from-html-isomorphic": "^2.0.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.525.0",
     "mdast-util-to-string": "^4.0.0",
-    "mermaid": "^11.8.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "reading-time": "^1.5.0",
@@ -32,12 +36,6 @@
     "tailwindcss": "^4.1.11",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
-    "vfile": "^6.0.3",
-    "@tailwindcss/typography": "^0.5.16",
-    "@types/lodash": "^4.17.20",
-    "@types/lunr": "^2.3.7",
-    "@types/markdown-it": "^14.1.2",
-    "daisyui": "^5.0.43",
-    "markdown-it": "^14.1.0"
+    "vfile": "^6.0.3"
   }
 }
