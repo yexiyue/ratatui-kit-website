@@ -81,11 +81,6 @@ export const DocsSearch = () => {
     setValue(event.target.value);
   };
 
-  const show =
-    value.length > 0 &&
-    (results.docs?.length > 0 ||
-      results.example?.length > 0 ||
-      results.principle?.length > 0);
   const handleSearchClick = () => {
     setShowModal(true);
 
@@ -117,8 +112,8 @@ export const DocsSearch = () => {
       results.principle?.length > 0);
   return (
     <div className="w-full relative">
-      <div className="w-full">
-        <label className="input input-sm w-full cursor-pointer">
+      <div className="w-full ">
+        <label className="input input-sm w-full cursor-pointer ">
           <svg
             className="h-[1em] opacity-50"
             xmlns="http://www.w3.org/2000/svg"
@@ -147,20 +142,36 @@ export const DocsSearch = () => {
 
       {showModal && (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center pt-8"
+          className="fixed inset-0 z-50 flex items-start justify-center pt-8 "
           onClick={closeModal}
         >
           <div className="fixed inset-0 bg-black/50 "></div>
           <div
-            className="relative z-10 w-full max-w-2xl bg-base-100 mt-16"
+            className="relative z-10 w-full max-w-2xl bg-base-100 mt-16 rounded-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="p-4 border-b  border-base-200">
+            <div className="p-4 border-b  border-base-100">
               <div className="flex items-center">
+                <svg
+                  className="h-[1em] opacity-50 md:h-[1.5em] "
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2.5"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                  </g>
+                </svg>
                 <input
                   ref={searchInputRef}
                   type="search"
-                  className="grow input input-lg"
+                  className="grow input input-md border-0 focus:border-0 focus:outline-none focus:ring-0"
                   placeholder="搜索文档..."
                   value={value}
                   onChange={handleChange}
@@ -192,7 +203,9 @@ export const DocsSearch = () => {
                             onClick={onClick}
                           >
                             <div>
-                              <div className="truncate font-bold">{title}</div>
+                              <div className="truncate font-bold mb-1">
+                                {title}
+                              </div>
                               <div className="truncate">{content}</div>
                             </div>
                           </a>
@@ -219,7 +232,9 @@ export const DocsSearch = () => {
                             onClick={onClick}
                           >
                             <div>
-                              <div className="truncate font-bold">{title}</div>
+                              <div className="truncate font-bold mb-1">
+                                {title}
+                              </div>
                               <div className="truncate">{content}</div>
                             </div>
                           </a>
@@ -246,7 +261,9 @@ export const DocsSearch = () => {
                             onClick={onClick}
                           >
                             <div>
-                              <div className="truncate font-bold">{title}</div>
+                              <div className="truncate font-bold mb-1">
+                                {title}
+                              </div>
                               <div className="truncate">{content}</div>
                             </div>
                           </a>
@@ -255,12 +272,21 @@ export const DocsSearch = () => {
                     })}
                   </>
                 )}
-                {!showResults && value && (
+                {!value && (
                   <li className="py-4 text-center text-gray-500">
-                    未找到匹配结果
+                    没有搜索历史
+                  </li>
+                )}
+
+                {value && !showResults && (
+                  <li className="py-4 text-center text-gray-500">
+                    未匹配到相关搜索结果
                   </li>
                 )}
               </ul>
+            </div>
+            <div className="p-2 border-t border-base-100 shadow-2xl flex justify-end">
+              footer
             </div>
           </div>
         </div>
