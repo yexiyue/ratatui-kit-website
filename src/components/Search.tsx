@@ -48,7 +48,8 @@ export const DocsSearch = () => {
               resolution: 3,
             },
           ],
-          store: ["title", "group"],
+
+          store: ["title", "group", "content"],
         });
         data.forEach((doc: Article) => {
           flexSearch.add(doc);
@@ -63,7 +64,15 @@ export const DocsSearch = () => {
       enrich: true,
       suggest: true,
       merge: true,
+      highlight: {
+        template: "$1",
+        boundary: 15,
+        ellipsis: {
+          template: "",
+        },
+      },
     });
+
     setResults(lodash.groupBy(res, "doc.group") as any);
   }, [value]);
 
@@ -126,17 +135,22 @@ export const DocsSearch = () => {
               <li className="menu-title text-info">文档</li>
               {results.docs.map((doc) => {
                 const title = doc.doc?.title || "";
+                const content = doc.highlight?.content || "";
+
                 const isMatch = containsSearchTerm(title, value);
                 return (
-                  <li key={doc.id}>
+                  <li key={doc.id} className="block my-1">
                     <a
                       href={doc.id as string}
-                      className={`hover:bg-neutral hover:text-neutral-content ${
-                        isMatch ? "bg-red-600 text-white" : ""
+                      className={`o hover:bg-neutral hover:text-neutral-content   ${
+                        isMatch ? "bg-red-600 text-white " : ""
                       }`}
                       onClick={onClick}
                     >
-                      {title}
+                      <div>
+                        <div className="truncate  font-bold">{title}</div>
+                        <div className="truncate">{content}</div>
+                      </div>
                     </a>
                   </li>
                 );
@@ -149,9 +163,11 @@ export const DocsSearch = () => {
 
               {results.example.map((doc) => {
                 const title = doc.doc?.title || "";
+                const content = doc.highlight?.content || "";
+
                 const isMatch = containsSearchTerm(title, value);
                 return (
-                  <li key={doc.id}>
+                  <li key={doc.id} className="block my-1">
                     <a
                       href={doc.id as string}
                       className={`hover:bg-neutral hover:text-neutral-content ${
@@ -159,7 +175,10 @@ export const DocsSearch = () => {
                       }`}
                       onClick={onClick}
                     >
-                      {title}
+                      <div>
+                        <div className="truncate  font-bold">{title}</div>
+                        <div className="truncate">{content}</div>
+                      </div>
                     </a>
                   </li>
                 );
@@ -171,17 +190,22 @@ export const DocsSearch = () => {
               <li className="menu-title text-info">原理</li>
               {results.principle.map((doc) => {
                 const title = doc.doc?.title || "";
+                const content = doc.highlight?.content || "";
+
                 const isMatch = containsSearchTerm(title, value);
                 return (
-                  <li key={doc.id}>
+                  <li key={doc.id} className="block my-0.25">
                     <a
                       href={doc.id as string}
                       className={`hover:bg-neutral hover:text-neutral-content ${
-                        isMatch ? "bg-red-600 text-white" : ""
+                        isMatch ? "bg-red-600 text-white " : ""
                       }`}
                       onClick={onClick}
                     >
-                      {title}
+                      <div>
+                        <div className="truncate font-bold">{title}</div>
+                        <div className="truncate">{content}</div>
+                      </div>
                     </a>
                   </li>
                 );
