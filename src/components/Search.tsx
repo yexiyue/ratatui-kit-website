@@ -9,7 +9,8 @@ import lodash from "lodash";
 
 export const DocsSearch = () => {
   const [value, setValue] = useState("");
-
+  const [showModal, setShowModal] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const fuse = useRef<Document<Article> | null>(null);
   const [results, setResults] = useState<
     Record<
@@ -85,8 +86,18 @@ export const DocsSearch = () => {
     (results.docs?.length > 0 ||
       results.example?.length > 0 ||
       results.principle?.length > 0);
+  const handleSearchClick = () => {
+    setShowModal(true);
 
-  const onClick = () => {
+    setTimeout(() => {
+      if (searchInputRef.current) {
+        searchInputRef.current.focus();
+      }
+    }, 100);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
     setValue("");
     setResults({
       docs: [],
@@ -95,10 +106,20 @@ export const DocsSearch = () => {
     });
   };
 
+  const onClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    closeModal();
+  };
+  const showResults =
+    value.length > 0 &&
+    (results.docs?.length > 0 ||
+      results.example?.length > 0 ||
+      results.principle?.length > 0);
   return (
     <div className="w-full relative">
+      {/* 原位置搜索框 - 点击触发模态框 */}
       <div className="w-full">
-        <label className="input input-sm w-full ">
+        <label className="input input-sm w-full cursor-pointer">
           <svg
             className="h-[1em] opacity-50"
             xmlns="http://www.w3.org/2000/svg"
@@ -119,101 +140,132 @@ export const DocsSearch = () => {
             type="search"
             className="grow"
             placeholder="搜索文档"
-            value={value}
-            onChange={handleChange}
+            onClick={handleSearchClick}
+            readOnly
           />
         </label>
       </div>
-      <div
-        className={`w-full bg-base-100 absolute top-12 z-10 max-h-60 overflow-y-auto ${
-          show ? "block" : "hidden"
-        }`}
-      >
-        <ul className="menu w-full">
-          {results.docs?.length > 0 && (
-            <>
-              <li className="menu-title text-info">文档</li>
-              {results.docs.map((doc) => {
-                const title = doc.doc?.title || "";
-                const content = doc.highlight?.content || "";
 
-                const isMatch = containsSearchTerm(title, value);
-                return (
-                  <li key={doc.id} className="block my-1">
-                    <a
-                      href={doc.id as string}
-                      className={`o hover:bg-neutral hover:text-neutral-content   ${
-                        isMatch ? "bg-red-600 text-white " : ""
-                      }`}
-                      onClick={onClick}
-                    >
-                      <div>
-                        <div className="truncate  font-bold">{title}</div>
-                        <div className="truncate">{content}</div>
-                      </div>
-                    </a>
+      {showModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-start justify-center pt-8"
+          onClick={closeModal}
+        >
+          <div className="fixed inset-0 bg-black/50 "></div>
+          <div
+            className="relative z-10 w-full max-w-2xl bg-base-100 mt-16"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="p-4 border-b  border-base-200">
+              <div className="flex items-center">
+                <input
+                  ref={searchInputRef}
+                  type="search"
+                  className="grow input input-lg"
+                  placeholder="搜索文档..."
+                  value={value}
+                  onChange={handleChange}
+                  autoFocus
+                />
+                <button className="btn btn-ghost ml-2" onClick={closeModal}>
+                  取消
+                </button>
+              </div>
+            </div>
+
+            <div className="max-h-[60vh] overflow-y-auto">
+              <ul className="menu w-full">
+                {results.docs?.length > 0 && (
+                  <>
+                    <li className="menu-title text-info">文档</li>
+                    {results.docs.map((doc) => {
+                      const title = doc.doc?.title || "";
+                      const content = doc.highlight?.content || "";
+
+                      const isMatch = containsSearchTerm(title, value);
+                      return (
+                        <li key={doc.id} className="block my-1">
+                          <a
+                            href={doc.id as string}
+                            className={`hover:bg-neutral hover:text-neutral-content ${
+                              isMatch ? "bg-red-600 text-white " : ""
+                            }`}
+                            onClick={onClick}
+                          >
+                            <div>
+                              <div className="truncate font-bold">{title}</div>
+                              <div className="truncate">{content}</div>
+                            </div>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </>
+                )}
+                {results.example?.length > 0 && (
+                  <>
+                    <li className="menu-title text-info">示例</li>
+                    {results.example.map((doc) => {
+                      const title = doc.doc?.title || "";
+                      const content = doc.highlight?.content || "";
+
+                      const isMatch = containsSearchTerm(title, value);
+                      return (
+                        <li key={doc.id} className="block my-1">
+                          <a
+                            href={doc.id as string}
+                            className={`hover:bg-neutral hover:text-neutral-content ${
+                              isMatch ? "bg-red-600 text-white" : ""
+                            }`}
+                            onClick={onClick}
+                          >
+                            <div>
+                              <div className="truncate font-bold">{title}</div>
+                              <div className="truncate">{content}</div>
+                            </div>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </>
+                )}
+                {results.principle?.length > 0 && (
+                  <>
+                    <li className="menu-title text-info">原理</li>
+                    {results.principle.map((doc) => {
+                      const title = doc.doc?.title || "";
+                      const content = doc.highlight?.content || "";
+
+                      const isMatch = containsSearchTerm(title, value);
+                      return (
+                        <li key={doc.id} className="block my-1">
+                          <a
+                            href={doc.id as string}
+                            className={`hover:bg-neutral hover:text-neutral-content ${
+                              isMatch ? "bg-red-600 text-white " : ""
+                            }`}
+                            onClick={onClick}
+                          >
+                            <div>
+                              <div className="truncate font-bold">{title}</div>
+                              <div className="truncate">{content}</div>
+                            </div>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </>
+                )}
+                {!showResults && value && (
+                  <li className="py-4 text-center text-gray-500">
+                    未找到匹配结果
                   </li>
-                );
-              })}
-            </>
-          )}
-          {results.example?.length > 0 && (
-            <>
-              <li className="menu-title text-info">示例</li>
-
-              {results.example.map((doc) => {
-                const title = doc.doc?.title || "";
-                const content = doc.highlight?.content || "";
-
-                const isMatch = containsSearchTerm(title, value);
-                return (
-                  <li key={doc.id} className="block my-1">
-                    <a
-                      href={doc.id as string}
-                      className={`hover:bg-neutral hover:text-neutral-content ${
-                        isMatch ? "bg-red-600 text-white" : ""
-                      }`}
-                      onClick={onClick}
-                    >
-                      <div>
-                        <div className="truncate  font-bold">{title}</div>
-                        <div className="truncate">{content}</div>
-                      </div>
-                    </a>
-                  </li>
-                );
-              })}
-            </>
-          )}
-          {results.principle?.length > 0 && (
-            <>
-              <li className="menu-title text-info">原理</li>
-              {results.principle.map((doc) => {
-                const title = doc.doc?.title || "";
-                const content = doc.highlight?.content || "";
-
-                const isMatch = containsSearchTerm(title, value);
-                return (
-                  <li key={doc.id} className="block my-0.25">
-                    <a
-                      href={doc.id as string}
-                      className={`hover:bg-neutral hover:text-neutral-content ${
-                        isMatch ? "bg-red-600 text-white " : ""
-                      }`}
-                      onClick={onClick}
-                    >
-                      <div>
-                        <div className="truncate font-bold">{title}</div>
-                        <div className="truncate">{content}</div>
-                      </div>
-                    </a>
-                  </li>
-                );
-              })}
-            </>
-          )}
-        </ul>
-      </div>
+                )}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
