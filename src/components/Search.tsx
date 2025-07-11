@@ -117,7 +117,6 @@ export const DocsSearch = () => {
       results.principle?.length > 0);
   return (
     <div className="w-full relative">
-      {/* 原位置搜索框 - 点击触发模态框 */}
       <div className="w-full">
         <label className="input input-sm w-full cursor-pointer">
           <svg
