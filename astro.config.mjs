@@ -8,13 +8,15 @@ import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import { fromHtmlIsomorphic } from "hast-util-from-html-isomorphic";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time";
 
+import mdx from "@astrojs/mdx";
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
 
-  integrations: [react()],
+  integrations: [react(), mdx()],
   site: "https://yexiyue.github.io/ratatui-kit-website",
   base: "/ratatui-kit-website",
   markdown: {

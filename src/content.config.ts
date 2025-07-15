@@ -3,7 +3,7 @@ import { defineCollection, z } from "astro:content";
 
 const principle = defineCollection({
   loader: glob({
-    pattern: "**/*.md",
+    pattern: "**/*.{md,mdx}",
     base: "./src/principle",
   }),
   schema: z.object({
@@ -14,7 +14,7 @@ const principle = defineCollection({
 
 const example = defineCollection({
   loader: glob({
-    pattern: "**/*.md",
+    pattern: "**/*.{md,mdx}",
     base: "./src/example",
   }),
   schema: ({ image }) =>
@@ -27,7 +27,7 @@ const example = defineCollection({
 
 const docs = defineCollection({
   loader: glob({
-    pattern: "**/*.md",
+    pattern: "**/*.{md,mdx}",
     base: "./src/docs",
   }),
   schema: z.object({
