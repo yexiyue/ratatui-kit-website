@@ -6,6 +6,8 @@ import {
   type MergedDocumentSearchResults,
 } from "flexsearch";
 import lodash from "lodash";
+import { createPortal } from "react-dom";
+import flexSearchSvg from "@/assets/flexsearch.svg";
 
 export const DocsSearch = () => {
   const [value, setValue] = useState("");
@@ -126,163 +128,166 @@ export const DocsSearch = () => {
         </label>
       </div>
 
-      {showModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-start justify-center pt-8 px-4 sm:px-0"
-          onClick={closeModal}
-        >
-          <div className="fixed inset-0 bg-black/50"></div>
-
+      {showModal &&
+        createPortal(
           <div
-            className="relative z-10 w-[90%] sm:w-full md:max-w-2xl bg-base-100 mt-6 rounded-2xl max-h-[90vh] flex flex-col"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-50 flex items-start justify-center pt-8 px-4 sm:px-0"
+            onClick={closeModal}
           >
-            <div className="py-2 sm:py-4 px-2 sm:px-4 border-b border-base-100">
-              <div className="flex items-center gap-2">
-                <svg
-                  className="h-[1.2em] opacity-50"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                >
-                  <g
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2.5"
-                    fill="none"
-                    stroke="currentColor"
+            <div className="fixed inset-0 bg-black/50"></div>
+
+            <div
+              className="relative z-10 w-[90%] sm:w-full md:max-w-2xl bg-base-100 mt-6 rounded-2xl max-h-[90vh] flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="py-2 sm:py-4 px-2 sm:px-4 border-b border-base-100">
+                <div className="flex items-center gap-2">
+                  <svg
+                    className="h-[1.2em] opacity-50"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
                   >
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.3-4.3" />
-                  </g>
-                </svg>
-                <input
-                  ref={searchInputRef}
-                  type="search"
-                  className="grow input input-md border-0 focus:border-0 focus:outline-none focus:ring-0"
-                  placeholder="搜索文档..."
-                  value={value}
-                  onChange={handleChange}
-                  autoFocus
-                />
-                <button
-                  className="btn btn-ghost ml-1 sm:ml-2"
-                  onClick={closeModal}
-                >
-                  取消
-                </button>
+                    <g
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      strokeWidth="2.5"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <circle cx="11" cy="11" r="8" />
+                      <path d="m21 21-4.3-4.3" />
+                    </g>
+                  </svg>
+                  <input
+                    ref={searchInputRef}
+                    type="search"
+                    className="grow input input-md border-0 focus:border-0 focus:outline-none focus:ring-0"
+                    placeholder="搜索文档..."
+                    value={value}
+                    onChange={handleChange}
+                    autoFocus
+                  />
+                  <button
+                    className="btn btn-sm btn-ghost ml-1 sm:ml-2"
+                    onClick={closeModal}
+                  >
+                    取消
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex-1 overflow-y-auto overflow-x-hidden px-4">
+                <ul className="menu w-full">
+                  {results.docs?.length > 0 && (
+                    <>
+                      <li className="menu-title text-info">文档</li>
+                      {results.docs.map((doc) => {
+                        const title = doc.doc?.title || "";
+                        const content = doc.highlight?.content || "";
+                        const isMatch = containsSearchTerm(title, value);
+                        return (
+                          <li key={doc.id} className="block my-1">
+                            <a
+                              href={doc.id as string}
+                              className={`hover:bg-neutral hover:text-neutral-content ${
+                                isMatch ? "bg-red-600 text-white" : ""
+                              }`}
+                              onClick={onClick}
+                            >
+                              <div>
+                                <div className="truncate font-bold mb-1">
+                                  {title}
+                                </div>
+                                <div className="truncate">{content}</div>
+                              </div>
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </>
+                  )}
+
+                  {results.example?.length > 0 && (
+                    <>
+                      <li className="menu-title text-info">示例</li>
+                      {results.example.map((doc) => {
+                        const title = doc.doc?.title || "";
+                        const content = doc.highlight?.content || "";
+                        const isMatch = containsSearchTerm(title, value);
+                        return (
+                          <li key={doc.id} className="block my-1">
+                            <a
+                              href={doc.id as string}
+                              className={`hover:bg-neutral hover:text-neutral-content ${
+                                isMatch ? "bg-red-600 text-white" : ""
+                              }`}
+                              onClick={onClick}
+                            >
+                              <div>
+                                <div className="truncate font-bold mb-1">
+                                  {title}
+                                </div>
+                                <div className="truncate">{content}</div>
+                              </div>
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </>
+                  )}
+
+                  {results.principle?.length > 0 && (
+                    <>
+                      <li className="menu-title text-info">原理</li>
+                      {results.principle.map((doc) => {
+                        const title = doc.doc?.title || "";
+                        const content = doc.highlight?.content || "";
+                        const isMatch = containsSearchTerm(title, value);
+                        return (
+                          <li key={doc.id} className="block my-1">
+                            <a
+                              href={doc.id as string}
+                              className={`hover:bg-neutral hover:text-neutral-content ${
+                                isMatch ? "bg-red-600 text-white" : ""
+                              }`}
+                              onClick={onClick}
+                            >
+                              <div>
+                                <div className="truncate font-bold mb-1">
+                                  {title}
+                                </div>
+                                <div className="truncate">{content}</div>
+                              </div>
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </>
+                  )}
+
+                  {!value && (
+                    <li className="py-4 text-center text-gray-500">
+                      没有搜索历史
+                    </li>
+                  )}
+
+                  {value && !showResults && (
+                    <li className="py-4 text-center text-gray-500">
+                      未匹配到相关搜索结果
+                    </li>
+                  )}
+                </ul>
+              </div>
+
+              {/* footer */}
+              <div className="p-2 border-t border-base-100 shadow-2xl flex justify-end">
+                <img className="h-6" src={flexSearchSvg.src} />
               </div>
             </div>
-
-            <div className="flex-1 overflow-y-auto overflow-x-hidden px-4">
-              <ul className="menu w-full">
-                {results.docs?.length > 0 && (
-                  <>
-                    <li className="menu-title text-info">文档</li>
-                    {results.docs.map((doc) => {
-                      const title = doc.doc?.title || "";
-                      const content = doc.highlight?.content || "";
-                      const isMatch = containsSearchTerm(title, value);
-                      return (
-                        <li key={doc.id} className="block my-1">
-                          <a
-                            href={doc.id as string}
-                            className={`hover:bg-neutral hover:text-neutral-content ${
-                              isMatch ? "bg-red-600 text-white" : ""
-                            }`}
-                            onClick={onClick}
-                          >
-                            <div>
-                              <div className="truncate font-bold mb-1">
-                                {title}
-                              </div>
-                              <div className="truncate">{content}</div>
-                            </div>
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </>
-                )}
-
-                {results.example?.length > 0 && (
-                  <>
-                    <li className="menu-title text-info">示例</li>
-                    {results.example.map((doc) => {
-                      const title = doc.doc?.title || "";
-                      const content = doc.highlight?.content || "";
-                      const isMatch = containsSearchTerm(title, value);
-                      return (
-                        <li key={doc.id} className="block my-1">
-                          <a
-                            href={doc.id as string}
-                            className={`hover:bg-neutral hover:text-neutral-content ${
-                              isMatch ? "bg-red-600 text-white" : ""
-                            }`}
-                            onClick={onClick}
-                          >
-                            <div>
-                              <div className="truncate font-bold mb-1">
-                                {title}
-                              </div>
-                              <div className="truncate">{content}</div>
-                            </div>
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </>
-                )}
-
-                {results.principle?.length > 0 && (
-                  <>
-                    <li className="menu-title text-info">原理</li>
-                    {results.principle.map((doc) => {
-                      const title = doc.doc?.title || "";
-                      const content = doc.highlight?.content || "";
-                      const isMatch = containsSearchTerm(title, value);
-                      return (
-                        <li key={doc.id} className="block my-1">
-                          <a
-                            href={doc.id as string}
-                            className={`hover:bg-neutral hover:text-neutral-content ${
-                              isMatch ? "bg-red-600 text-white" : ""
-                            }`}
-                            onClick={onClick}
-                          >
-                            <div>
-                              <div className="truncate font-bold mb-1">
-                                {title}
-                              </div>
-                              <div className="truncate">{content}</div>
-                            </div>
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </>
-                )}
-
-                {!value && (
-                  <li className="py-4 text-center text-gray-500">
-                    没有搜索历史
-                  </li>
-                )}
-
-                {value && !showResults && (
-                  <li className="py-4 text-center text-gray-500">
-                    未匹配到相关搜索结果
-                  </li>
-                )}
-              </ul>
-            </div>
-
-            {/* footer */}
-            <div className="p-2 border-t border-base-100 shadow-2xl flex justify-end">
-              footer
-            </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body,
+          "search-modal"
+        )}
     </div>
   );
 };
