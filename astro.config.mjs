@@ -15,7 +15,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-
   integrations: [react(), mdx()],
   site: "https://yexiyue.github.io/ratatui-kit-website",
   base: "/ratatui-kit-website",

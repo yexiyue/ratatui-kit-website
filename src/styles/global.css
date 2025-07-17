@@ -44,7 +44,7 @@
 }
 
 .astro-code {
-  @apply border border-base-300 bg-base-100!;
+  @apply border border-base-300 bg-base-100! flex!;
 }
 
 svg[id^="mermaid"] {
