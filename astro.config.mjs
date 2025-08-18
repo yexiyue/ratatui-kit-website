@@ -7,7 +7,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import { fromHtmlIsomorphic } from "hast-util-from-html-isomorphic";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time";
-import { publicDir, base } from "dragon.json";
+import { publicDir, base } from "./dragon.json";
 import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
