@@ -7,7 +7,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import { fromHtmlIsomorphic } from "hast-util-from-html-isomorphic";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time";
-
+import { publicDir, base } from "dragon.json";
 import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
@@ -17,7 +17,7 @@ export default defineConfig({
   },
   integrations: [react(), mdx()],
   site: "https://yexiyue.github.io/ratatui-kit-website",
-  base: "/ratatui-kit-website",
+  base,
   markdown: {
     remarkPlugins: [remarkReadingTime],
     shikiConfig: {
@@ -58,4 +58,5 @@ export default defineConfig({
       excludeLangs: ["mermaid", "math"],
     },
   },
+  publicDir,
 });

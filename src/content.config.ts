@@ -1,10 +1,11 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
+import { entries } from "../dragon.json";
 
 const principle = defineCollection({
   loader: glob({
     pattern: "**/*.{md,mdx}",
-    base: "./src/principle",
+    base: entries.principle.entryBase,
   }),
   schema: z.object({
     title: z.string(),
@@ -15,7 +16,7 @@ const principle = defineCollection({
 const example = defineCollection({
   loader: glob({
     pattern: "**/*.{md,mdx}",
-    base: "./src/example",
+    base: entries.example.entryBase,
   }),
   schema: ({ image }) =>
     z.object({
@@ -28,7 +29,7 @@ const example = defineCollection({
 const docs = defineCollection({
   loader: glob({
     pattern: "**/*.{md,mdx}",
-    base: "./src/docs",
+    base: entries.docs.entryBase,
   }),
   schema: z.object({
     title: z.string(),
