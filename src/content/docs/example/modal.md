@@ -134,4 +134,4 @@ fn JsonEditor(mut hooks: Hooks) -> impl Into<AnyElement<'static>> {
 ```
 
 运行结果如下:
-![modal.gif](/example/modal.gif)
+![modal.gif](/ratatui-kit-website/example/modal.gif)

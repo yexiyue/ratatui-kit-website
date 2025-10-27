@@ -88,4 +88,4 @@ fn MyTextInput(mut hooks: Hooks) -> impl Into<AnyElement<'static>> {
 ```
 
 运行结果如下：
-![textarea](/example/textarea.gif)
+![textarea](/ratatui-kit-website/example/textarea.gif)

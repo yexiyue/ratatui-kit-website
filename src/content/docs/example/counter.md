@@ -54,4 +54,4 @@ fn Counter(mut hooks: Hooks) -> impl Into<AnyElement<'static>> {
 ```
 
 运行结果如下：
-![counter.gif](/example/counter.gif)
+![counter.gif](/ratatui-kit-website/example/counter.gif)

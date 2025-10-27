@@ -91,4 +91,4 @@ fn MarkdownReader(mut hooks: Hooks) -> impl Into<AnyElement<'static>> {
 ```
 
 运行结果如下:
-![scrollview.gif](/example/scrollview.gif)
+![scrollview.gif](/ratatui-kit-website/example/scrollview.gif)

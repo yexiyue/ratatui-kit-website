@@ -153,4 +153,4 @@ fn InputPage(mut hooks: Hooks) -> impl Into<AnyElement<'static>> {
 ```
 
 运行结果如下:
-![store](/example/store.gif)
+![store](/ratatui-kit-website/example/store.gif)
